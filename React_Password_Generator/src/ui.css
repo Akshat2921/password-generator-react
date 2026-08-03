@@ -1,0 +1,30 @@
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#root{
+    width:800px;
+    padding: 20px 10px;
+    background-color: rgb(176, 113, 113);
+    text-align: center;
+}
+.password-box{
+    margin: 20px 0;
+    padding: 12px;
+    background: white;
+    border-radius: 8px;
+    font-size: 22px;
+
+     /* Password wrap hoga */
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+.second{
+    font-size: 30px;
+}
