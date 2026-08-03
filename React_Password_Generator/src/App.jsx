@@ -1,14 +1,14 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect, useCallback} from 'react';
 import './ui.css'
 
 const App = () => {
  
-    const [Password, setPassword] = useState("");
+    const [password, setPassword] = useState("");
     const [length, setLength] = useState(20);
     const [numberChange, setNumberChange] = useState(false);
     const [characterChange, setCharacterChange] = useState(false);
 
-    function generatePassword() {
+    const generatePassword= useCallback(() => {
       let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
       if(numberChange) {
         characters += '0123456789';
@@ -24,26 +24,27 @@ const App = () => {
         pass += randomPass;
       }
       setPassword(pass);
-    }
+    },[length, numberChange, characterChange]);
+
     useEffect(() => {
       generatePassword();
-    }, [length, numberChange, characterChange]);
+    }, [generatePassword]);
   return (
     <>
       <h1>Password is : </h1>
-      <div className="password-box"> {Password} </div>
+      <div className="password-box"> {password} </div>
       <div className='second'>
         <input type="range" min={5} max={50} value={length} onChange={(e) => setLength(Number(e.target.value))}/>
         <label>Length is: {length}</label>
 
-        <input type="checkbox" defaultChecked={numberChange} onChange={(e) => setNumberChange(!numberChange)}></input>
+        <input type="checkbox" checked={numberChange} onChange={(e) => setNumberChange(!numberChange)}></input>
         <label>Number</label>
 
-        <input type="checkbox" defaultChecked={characterChange} onChange={(e) => setCharacterChange(!characterChange)}></input>
+        <input type="checkbox" checked={characterChange} onChange={(e) => setCharacterChange(!characterChange)}></input>
         <label>Character</label>
       </div>
     </>
   )
 }
 
-export default App
+export default App;
